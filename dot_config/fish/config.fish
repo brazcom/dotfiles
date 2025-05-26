@@ -7,3 +7,15 @@ end
 fastfetch -c /home/mattia/.config/fastfetch/config1.jsonc
 
 export PATH="$PATH:$HOME/.config/scripts"
+
+# Avvia ssh-agent se non è già in esecuzione
+if not pgrep -u (whoami) ssh-agent > /dev/null
+    eval (ssh-agent -c) > /dev/null
+    set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+    set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+end
+
+# Aggiungi automaticamente la chiave se non è già caricata
+if not ssh-add -l > /dev/null 2>&1
+    ssh-add ~/.ssh/id_ed25519 > /dev/null 2>&1
+end
