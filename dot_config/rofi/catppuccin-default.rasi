@@ -27,7 +27,7 @@
   normal-foreground:           @foreground;
   alternate-urgent-foreground: @red;
   alternate-active-foreground: @blue;
-  font: "Monospace 9";
+  font: "FiraCode Nerd Font 12";
 
 }
 element {
@@ -88,7 +88,7 @@ window {
     padding:          2;
     background-color: @background;
     border:           1;
-    width: 350px;
+    width: 450px;
 }
 mainbox {
     padding: 0;
