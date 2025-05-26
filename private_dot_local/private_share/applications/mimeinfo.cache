@@ -1,0 +1,14 @@
+[MIME Cache]
+application/ogg=cmus.desktop;
+application/x-ogg=cmus.desktop;
+audio/aac=mpvplay.desktop;
+audio/flac=cmus.desktop;mpvplay.desktop;
+audio/mp3=cmus.desktop;
+audio/mp4=mpvplay.desktop;
+audio/mpeg=cmus.desktop;mpvplay.desktop;
+audio/ogg=cmus.desktop;mpvplay.desktop;
+audio/opus=cmus.desktop;mpvplay.desktop;
+audio/wav=mpvplay.desktop;
+audio/x-flac=cmus.desktop;
+audio/x-mp3=cmus.desktop;
+audio/x-wav=cmus.desktop;

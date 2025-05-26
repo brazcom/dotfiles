@@ -1,0 +1,164 @@
+[cmdline]
+0=
+
+[input-def]
+0=*
+
+[inpmc.hotlist.add]
+0=MEDIA1
+1=/mnt/MEDIA1
+2=/mnt/MEDIA2
+
+[inpmc.fm.filtered-view]
+0=*.wav
+
+[:select_cmd: Select ]
+0=.jpg
+1=.wav
+2=*.wav
+
+[input]
+0=.config
+
+[inpmc.fm.mkdir]
+0=Acaoellas_ Mixed
+1=library
+2=BitwigStudio
+3=themes
+4=Bitwig Studio 5.2.3 FLARE
+5=.dotfiles
+6=Pictures
+7=Vecchiume
+8=Ableton Archivio
+9=Gaming
+10=Oldies gold
+11=Audio Lab
+12=Docs
+13=Video
+14=Xaev Kit 1
+15=nvidia old drivers
+16=Applications
+
+[input2]
+0=/mnt/FFFB-F380/Sample Library
+1=/mnt/FFFB-F380/Sample Library/Acaoellas_ Mixed/
+2=/mnt/FFFB-F380/Sample Library/ACD Audio Crack Dealers/
+3=/mnt/FFFB-F380/Sample Library/MIDI Packs/USER
+4=/mnt/FFFB-F380/Sample Library/MIDI Packs/USER/
+5=/mnt/FFFB-F380/Unsorted/
+6=/mnt/FFFB-F380/Sample Library/
+7=/mnt/FFFB-F380/Musica/library
+8=/mnt/FFFB-F380/Musica
+9=/mnt/FFFB-F380/Musica/JAPAN
+10=/mnt/FFFB-F380/Musica/
+11=cleaninstall.html
+12=installguide
+13=guidabase.html
+14=/home/mattia/BitwigStudio
+15=/home/mattia/.config/qBittorrent/themes/
+16=csmaster.html
+17=/home/mattia/.config/
+18=/home/mattia/Documents
+19=/home/mattia/Pictures/
+20=bitwig-aur-5.2.3
+21=/home/mattia/Downloads/Bitwig Studio 5.2.3 FLARE/
+22=Bitwig Studio Arch Pack
+23=/home/mattia/.dotfiles/
+24=/mnt/MEDIA2/Pictures/MEME
+25=/mnt/MEDIA2/Pictures/MEME/Vecchiume
+26=/mnt/MEDIA2/Movies
+27=/mnt/MEDIA2/Ableton Archivio
+28=/mnt/MEDIA2/Ableton Archivio/
+29=/mnt/MEDIA2/Movies/
+30=/mnt/MEDIA2/Gaming/Oldies gold
+31=/mnt/MEDIA2/Pictures/
+32=/mnt/MEDIA2/Gaming/
+33=/mnt/MEDIA2/Audio Lab
+34=/mnt/MEDIA2/Unsorted/Old Docs/Manuals/
+35=/mnt/MEDIA2/Unsorted/Manuali
+36=/mnt/MEDIA2/Audio Lab/Ableton Archivio/
+37=old torrents
+38=/mnt/MEDIA2/Docs/old torrents/
+39=/mnt/MEDIA2/Docs
+40=/mnt/MEDIA2/Musica/
+41=/mnt/MEDIA2/Docs/
+42=Music
+43=Pics
+44=/mnt/MEDIA2/Video
+45=/home/mattia/Downloads/Xaev Kit 1/
+46=/home/mattia/Downloads/Xaev Kit 1
+47=/home/mattia
+48=/home/mattia/nvidia old drivers
+49=/home/mattia/Downloads/
+50=/home/mattia/.local/share/
+51=/mnt/MEDIA2/Tools
+52=/home/mattia/
+
+[Dir Hist New Right Panel]
+0=/home/mattia/.config/i3
+1=/home/mattia/.config/fish
+2=/home/mattia/Downloads/DOTS 2025
+3=/home/mattia/Downloads
+4=/home/mattia/.config
+5=/home/mattia/.dotfiles
+6=/
+7=/home
+8=/home/mattia/.local
+9=/home/mattia/.local/share/Applications
+10=/home/mattia/.local/share
+11=/home/mattia/.local/share/applications
+12=/home/mattia
+
+[Dir Hist New Left Panel]
+0=/home/mattia/Downloads/DOTS 2025/.config/fish
+1=/home/mattia/Downloads/DOTS 2025/.config/i3
+2=/home/mattia/.config/scripts
+3=/home/mattia/Downloads/DOTS 2025/.config
+4=/home/mattia/Downloads/DOTS 2025
+5=/home/mattia/Downloads/DOTS 2025/.local
+6=/home/mattia/Downloads/DOTS 2025/.local/share
+7=/home/mattia/.local/share/mc/skins
+8=/home/mattia/Downloads/DOTS 2025/.config/mc
+9=/mnt/MEDIA1
+10=/mnt
+11=/mnt/MEDIA2/Musica/Cdot Honcho - (2017) H3
+12=/mnt/MEDIA2/Musica
+13=/mnt/MEDIA2/Musica/Bouncy
+14=/mnt/MEDIA2/Musica/Bouncy/Denz1000 - glorpy basslines for getting wobbly
+15=/home/mattia/.local/share/applications
+16=/home/mattia/.local/share/gtksourceview-4/styles
+17=/home/mattia/.local/share/gtksourceview-4
+18=/home/mattia/.local/share
+19=/home/mattia/.local
+20=/mnt/MEDIA2/Avatars
+21=/home/mattia/Pictures
+22=/home/mattia/mousepad
+23=/home/mattia/Downloads/Bitwig Studio Arch Pack
+24=/home/mattia/Downloads/Bitwig Studio Arch Pack/FLARE
+25=/home/mattia/Downloads/7930v1A.zip/uzip://
+26=/home/mattia/Downloads/7930v1A.zip/uzip://7930v1A
+27=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer/opt/zrythm-trial-1.0.0/etc
+28=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer/opt/zrythm-trial-1.0.0/lib
+29=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer/opt/zrythm-trial-1.0.0/libexec
+30=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer/opt/zrythm-trial-1.0.0/share
+31=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer/opt/zrythm-trial-1.0.0
+32=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer/opt
+33=/home/mattia/.config/Mousepad
+34=/home/mattia/.config
+35=/home/mattia/.config/aconfmgr
+36=/mnt/MEDIA2/Tools
+37=/mnt/MEDIA2/Docs
+38=/mnt/MEDIA2
+39=/
+40=/home
+41=/home/mattia/.dotfiles
+42=/home/mattia/.dotfiles/.local
+43=/home/mattia/.dotfiles/.local/share/applications
+44=/home/mattia/.dotfiles/.local/share
+45=/home/mattia/Downloads/balenaEtcher-linux-x64-2.1.2.zip/uzip://balenaEtcher-linux-x64
+46=/home/mattia/Downloads/balenaEtcher-linux-x64-2.1.2.zip/uzip://
+47=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://zrythm-trial-1.0.0-installer
+48=/home/mattia/Downloads/zrythm-trial-1.0.0-installer.zip/uzip://
+49=/home/mattia/Downloads
+50=/home/mattia
+51=/home/mattia/.config/chezmoi

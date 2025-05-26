@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=MPV Playlist Player
+Exec=mpvplay.sh %f
+MimeType=audio/mpeg;audio/flac;audio/ogg;audio/opus;audio/wav;audio/mp4;audio/aac;
+Terminal=false
+Type=Application
+Icon=multimedia-player
+Categories=AudioVideo;Player;Audio;

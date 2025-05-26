@@ -1,0 +1,26 @@
+
+general.import = ["/home/mattia/.config/alacritty/dracula.toml"]
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+
+[window]
+
+opacity = 0.8
+title = "alacritty"
+class = "alacritty"
+
+[font]
+
+normal = { family = "monospace", style = "regular" }
+size = 9
+
+[terminal]
+
+[terminal.shell]
+program = "/usr/bin/fish"
+args = ["--login"]
+
+
+
