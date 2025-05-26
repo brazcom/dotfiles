@@ -6,15 +6,4 @@ if status is-interactive
 end
 fastfetch -c /home/mattia/.config/fastfetch/config1.jsonc
 
-#My shortcuts
-#$ alias yabridgectl="~/.local/share/yabridge/yabridgectl"
-export PATH="$PATH:$HOME/.local/share/yabridge"
 export PATH="$PATH:$HOME/.config/scripts"
-
-# Created by `pipx` on 2025-05-23 07:49:04
-set PATH $PATH /home/mattia/.local/bin
-
-if not set -q SSH_AUTH_SOCK
-    eval (ssh-agent -c)
-    ssh-add ~/.ssh/id_ed25519
-end
