@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Crea la directory necessaria per l'override del servizio getty su tty1
+sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+
+# Scrive il contenuto nel file override.conf
+sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null <<EOF
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin mattia --noclear %I \$TERM
+EOF
+
+# Ricarica i processi di sistema per applicare le modifiche
+sudo systemctl daemon-reexec
+
+echo "Configurazione completata con successo."
