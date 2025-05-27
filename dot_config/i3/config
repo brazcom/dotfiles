@@ -13,6 +13,8 @@ for_window [class="kitty_float"] move position center
 #for_window [class="citron"] floating enable
 for_window [class="^.*"] border pixel 1
 font pango:monospace 10
+default_border none
+default_floating_border none
 
 $exec dex --autostart --environment i3
 exec_always --no-startup-id autotiling
@@ -24,8 +26,8 @@ include ~/.config/i3/workspaces.conf
 include ~/.config/i3/modes.conf
 include ~/.config/i3/colors.conf
 
-#gaps inner 7px
-#gaps outer 3px
+gaps inner 7px
+gaps outer 3px
 
 ### Polybar ###
 exec_always --no-startup-id ~/.config/polybar/polybar.sh &
