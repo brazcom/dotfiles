@@ -13,7 +13,6 @@ class = "alacritty"
 
 [font]
 
-normal = { family = "FiraCode Nerd Font", style = "regular" }
 size = 12
 
 [terminal]

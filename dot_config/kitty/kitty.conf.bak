@@ -64,3 +64,9 @@ inactive_border_color #6272a4
 shell fish
 
 
+# BEGIN_KITTY_FONTS
+font_family      family="Adwaita Mono"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS

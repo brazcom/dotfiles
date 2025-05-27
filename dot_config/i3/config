@@ -13,7 +13,7 @@ for_window [class="kitty_float"] move position center
 #for_window [class="citron"] floating enable
 for_window [class="^.*"] border pixel 1
 font pango:monospace 10
-default_border none
+default_border pixel 1
 default_floating_border none
 
 $exec dex --autostart --environment i3
