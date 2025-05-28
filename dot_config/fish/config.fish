@@ -22,8 +22,8 @@ end
 
 set -gx EDITOR nano
 
-function chezmoipush
-    chezmoi git add .
-    and chezmoi git commit -- -m "Update dotfiles"
-    and chezmoi git push
-end
+#function chezmoipush
+#    chezmoi git add .
+#    and chezmoi git commit -- -m "Update dotfiles"
+#    and chezmoi git push
+#end
