@@ -8,7 +8,6 @@ DOTFILES_DIRS=(
   "$HOME/.config/installers"
   "$HOME/.config/kitty"
   "$HOME/.config/polybar"
-  "$HOME/.config/alacritty"
   "$HOME/.local/share/applications"
 )
 
