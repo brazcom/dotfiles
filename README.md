@@ -1,8 +1,10 @@
-## chezmoi.dots
+# chezmoi.dots
 
 ---
 
-### fresh start
+## fresh start
+
+### initialize
 
 ```bash
 chezmoi init --apply brazcom
@@ -10,7 +12,33 @@ chezmoi init --apply brazcom
 
 ---
 
-### daily usage
+### installer scripts
+
+```bash
+cd .config/installers
+```
+
+-basic packages
+
+```bash
+ezbasics.sh
+```
+
+-tty autologin
+
+```bash
+ezautologin.sh
+```
+
+-ssh config
+
+```bash
+sshconfig.sh
+```
+
+---
+
+## daily usage
 
 write local changes to chezmoi:
 
