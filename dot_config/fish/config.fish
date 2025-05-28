@@ -20,10 +20,6 @@ if not ssh-add -l > /dev/null 2>&1
     ssh-add ~/.ssh/id_ed25519 > /dev/null 2>&1
 end
 
-set -gx EDITOR nano
+set -gx EDITOR micro
 
-#function chezmoipush
-#    chezmoi git add .
-#    and chezmoi git commit -- -m "Update dotfiles"
-#    and chezmoi git push
-#end
+
