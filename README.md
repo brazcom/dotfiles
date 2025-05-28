@@ -43,13 +43,13 @@ sshconfig.sh
 write local changes to chezmoi:
 
 ```bash
-chezadd.sh
+chezadd
 ```
 
 commit and push:
 
 ```bash
-chezpush.sh
+chezpush
 ```
 
 ---
@@ -63,6 +63,5 @@ chezpush.sh
   "$HOME/.config/installers"
   "$HOME/.config/kitty"
   "$HOME/.config/polybar"
-  "$HOME/.config/alacritty"
   "$HOME/.local/share/applications"
 ```
