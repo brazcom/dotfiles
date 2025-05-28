@@ -30,7 +30,7 @@ ezbasics.sh
 ezautologin.sh
 ```
 
--ssh config
+-ssh + github config
 
 ```bash
 sshconfig.sh
