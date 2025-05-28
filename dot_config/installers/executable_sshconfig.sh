@@ -5,7 +5,7 @@
 
 set -e  # Esce se qualsiasi comando fallisce
 
-EMAIL="bassinimattia@gmail.com"
+EMAIL="sobahighroller@gmail.com"
 SSH_DIR="$HOME/.ssh"
 KEY_FILE="$SSH_DIR/id_ed25519"
 FISH_CONFIG="$HOME/.config/fish/config.fish"
