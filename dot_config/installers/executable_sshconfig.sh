@@ -36,6 +36,14 @@ eval "$(ssh-agent -s)"
 ssh-add "$KEY_FILE"
 echo "✅ Chiave aggiunta a ssh-agent"
 
+# Configura le impostazioni globali di Git
+echo "🔧 Configurazione Git globale..."
+git config --global user.name "brazcom"
+git config --global user.email "sobahighroller@gmail.com"
+echo "✅ Git configurato con:"
+echo "   user.name  = $(git config --global user.name)"
+echo "   user.email = $(git config --global user.email)"
+
 # Configura fish per avviare automaticamente ssh-agent
 echo "🐠 Configurazione fish shell..."
 
