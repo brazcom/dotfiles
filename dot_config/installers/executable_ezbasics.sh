@@ -11,12 +11,7 @@ PACMAN_PKGS=(
     i3-wm
     git
     chezmoi
-    micro
-    ncdu
-    firefox-ublock-origin
-    pass
-    rofi-emoji
-    pokemon-colorscripts-git
+    ttf-firacode-nerd
     kitty
     rofi
     mousepad
