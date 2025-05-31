@@ -1,0 +1,2 @@
+#!/bin/bash
+chezmoi edit ~/.config/i3/keybinds.conf
