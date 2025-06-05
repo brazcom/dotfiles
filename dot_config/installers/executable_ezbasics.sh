@@ -16,6 +16,15 @@ PACMAN_PKGS=(
     feh
     mc
     qbittorrent
+    rofi
+    cmus
+    xclip
+    maim
+    mpv
+    micro
+    firefox-ublock-origin
+    otf-commit-mono-nerd
+    pokemon-colorscripts-git
 )
 
 # Installa pacchetti ufficiali
