@@ -24,7 +24,6 @@ PACMAN_PKGS=(
     micro
     firefox-ublock-origin
     otf-commit-mono-nerd
-    pokemon-colorscripts-git
 )
 
 # Installa pacchetti ufficiali
