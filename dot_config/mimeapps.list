@@ -2,3 +2,5 @@
 [Default Applications]
 image/gif=mpv.desktop
 audio/flac=mpvplay.desktop
+audio/opus=mpvplay.desktop
+audio/ogg=mpvplay.desktop
