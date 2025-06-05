@@ -62,6 +62,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *browsercmd[]      = { "firefox", NULL };
 
+#include <X11/XF86keysym.h>
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -74,6 +76,15 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("maim ~/Pictures/screenshot-$(date +%F_%T).png") },
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("maim -i $(xdotool getactivewindow) ~/Pictures/screenshot-window-$(date +%F_%T).png") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	// Volume Up
+	{ 0, XF86XK_AudioRaiseVolume,			   spawn, 		   SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +10%") },
+	
+	// Volume Down
+	{ 0, XF86XK_AudioLowerVolume,			   spawn,		   SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -10%") },
+	
+	// Mute
+	{ 0, XF86XK_AudioMute,       			   spawn, 		   SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
+	
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },

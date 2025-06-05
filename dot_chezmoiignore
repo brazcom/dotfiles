@@ -1,0 +1,5 @@
+.config/dwm/*.o
+.config/dwm/dwm
+.config/slstatus/*.o
+.config/slstatus/slstatus
+.config/mc/ini
