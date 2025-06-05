@@ -22,4 +22,8 @@ end
 
 set -gx EDITOR micro
 
-
+alias ls='lsd'
+alias tree='exa --tree'
+alias ll='exa -alh'
+alias cdwm='chezmoi edit ~/.config/dwm/config.h'
+alias mdwm='cd ~/.config/dwm; sudo make clean install'

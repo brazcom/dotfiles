@@ -8,19 +8,13 @@ fi
 
 # Pacchetti ufficiali da installare con pacman
 PACMAN_PKGS=(
-    i3-wm
     git
     chezmoi
-    ttf-firacode-nerd
     kitty
-    rofi
-    mousepad
+    lsd
+    pass
     feh
     mc
-    polybar
-    maim
-    xdotool
-    xclip
     qbittorrent
 )
 
@@ -40,15 +34,5 @@ if ! command -v paru &> /dev/null; then
         makepkg -si --noconfirm
     '
 fi
-
-# Pacchetti da AUR
-#AUR_PKGS=(
-#    pokemon-colorscripts-git
-#    autotiling
-#)
-
-# Installa pacchetti AUR
-#echo "📦 Installazione pacchetti AUR con paru..."
-#sudo -u "$SUDO_USER" paru -S --noconfirm "${AUR_PKGS[@]}"
 
 echo "✅ Tutti i pacchetti sono stati installati con successo."
