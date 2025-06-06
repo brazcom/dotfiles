@@ -1,0 +1,19 @@
+{
+  "asciiSource": "/home/mattia/.config/fastfetch/s.ascii",
+  "separator": "  ",
+  "padding": 0,
+  "keyWidth": 10,
+  "keyColor": "blue",
+  "valueColor": "white",
+  "modules": [
+    { "type": "os" },
+    { "type": "kernel" },
+    { "type": "shell" },
+    { "type": "wm" },
+    { "type": "cpu" },
+    { "type": "gpu" },
+    { "type": "memory" },
+    { "type": "disk" },
+    { "type": "colors" }
+  ]
+}

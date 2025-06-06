@@ -4,7 +4,7 @@ set -U fish_greeting
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
-echo 'ciao Matty'
+echo 'ciao!'
 
 export PATH="$PATH:$HOME/.config/scripts"
 
@@ -25,8 +25,9 @@ set -gx EDITOR micro
 alias ls='lsd'
 alias tree='exa --tree'
 alias ll='exa -alh'
-alias cdwm='chezmoi edit ~/.config/dwm/config.h'
+alias cdwm='chezmoi edit ~/.config/dwm/config.h; chezmoi apply'
 alias mdwm='cd ~/.config/dwm; sudo make clean install'
+alias cfish='chezmoi edit ~/.config/fish/config.fish; chezmoi apply'
 
 # ===== SSH AGENT AUTO-START =====
 # Configurazione automatica per ssh-agent
