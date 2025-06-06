@@ -34,4 +34,5 @@ PACMAN_PKGS=(
     micro
     firefox-ublock-origin
     otf-commit-mono-nerd
+    noto-fonts-emoji
 )
