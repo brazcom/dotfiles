@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Verifica che lo script sia eseguito come root
+if [[ $EUID -ne 0 ]]; then
+    echo "Per favore esegui questo script con sudo o come root."
+    exit 1
+fi
+
+PACMAN_PKGS=(
+    git
+    chezmoi
+    kitty
+    lsd
+    pass
+    feh
+    mc
+    qbittorrent
+    rofi
+    cmus
+    xclip
+    xdotool
+    xorg-server
+    xorg-server-common
+    xorg-setxkbmap
+    xorg-xinit
+    xorg-xrandr
+    rofi-emoji
+    nano
+    libx11
+    gnupg
+    openssh
+    maim
+    mpv
+    micro
+    firefox-ublock-origin
+    otf-commit-mono-nerd
+)
