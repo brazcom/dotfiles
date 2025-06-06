@@ -19,7 +19,7 @@
     selected-active-foreground:  rgba ( 0, 96, 0, 100 % );
     alternate-active-background: rgba ( 0, 0, 0, 0 % );
     background:                  rgba ( 192, 192, 192, 100 % ); /*****************/
-    bordercolor:                 rgba ( 0, 0, 128, 100 % );   /*****************/
+    bordercolor:                 #373b41;   /*****************/
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 0, 0, 0, 0 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
@@ -34,13 +34,15 @@
     alternate-active-foreground: @active-foreground;
     active-background:           rgba ( 0, 0, 0, 0 % );
     selected-active-background:  rgba ( 160, 255, 160, 100 % );
+    
+    font: 						 "BigBlueTermPlus Nerd Font Mono 12";
 }
 window {
     background-color: @background;
     border: 4;
     padding: 5;
     height: 260;
-    width: 550;
+    width: 500;
     y-offset:50;
 }
 mainbox {

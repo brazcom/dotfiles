@@ -12,7 +12,7 @@
 	red: #eb6f92;
 	yel: #f6c177;
 
-	font: "CommitMono Nerd Font Mono 12";
+	font: "BigBlueTermPlus Nerd Font Mono 12";
 
 	foreground: @fgd;
 	background: @bg;
