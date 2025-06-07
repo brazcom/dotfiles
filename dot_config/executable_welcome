@@ -1,0 +1,5 @@
+#!/bin/bash
+figlet "SUCK LESS" -f "Cosmike" -d ~/.config/figletfonts/ -w 80
+echo "   "
+echo "   "
+fastfetch --logo none
