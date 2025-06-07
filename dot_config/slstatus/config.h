@@ -13,8 +13,7 @@ static const char unknown_str[] = "n/a";
 /* output formats */
 static const struct arg args[] = {
 	/* function, format, argument */
-	{ volume_perc, "%s ", "NULL" },
-    { cpu_perc,     "󰇙󰇙 CPU %s 󰇙󰇙 ", "NULL" },
-    { ram_perc,   "RAM %s 󰇙󰇙 ", "NULL" },
-	{ datetime, "%s", "%T" },
+    { cpu_perc,     "[CPU %s] ", "NULL" },
+    { ram_perc,   "[RAM %s] ", "NULL" },
+	{ datetime, "%s", " %d-%m  %R" },
 };

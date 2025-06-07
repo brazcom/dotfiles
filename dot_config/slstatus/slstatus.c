@@ -21,9 +21,6 @@ char buf[1024];
 static volatile sig_atomic_t done;
 static Display *dpy;
 
-/* DICHIARAZIONE FUNZIONE PERSONALIZZATA */
-const char *volume_perc(const char *);
-
 #include "config.h"
 
 static void
@@ -135,41 +132,4 @@ main(int argc, char *argv[])
 	}
 
 	return 0;
-}
-
-static char volume_str[32] = {0};
-
-const char *
-volume_perc(const char *arg) {
-    FILE *fp;
-    int vol = -1;
-    char buf[128];
-
-    fp = popen("pactl get-sink-volume @DEFAULT_SINK@", "r");
-    if (!fp) return "vol n/a";
-
-    while (fgets(buf, sizeof(buf), fp)) {
-        char *p = strstr(buf, "%");
-        if (p) {
-            char *start = p;
-            while (start > buf && *(start - 1) >= '0' && *(start - 1) <= '9')
-                start--;
-            char temp[8];
-            int len = p - start;
-            if (len < (int)sizeof(temp)) {
-                strncpy(temp, start, len);
-                temp[len] = '\0';
-                vol = atoi(temp);
-                break;
-            }
-        }
-    }
-    pclose(fp);
-
-    if (vol < 0)
-        snprintf(volume_str, sizeof(volume_str), "󰖁");
-    else
-        snprintf(volume_str, sizeof(volume_str), " %d%%", vol);
-
-    return volume_str;
 }
