@@ -31,8 +31,7 @@ PACMAN_PKGS=(
     mpv
     micro
     firefox-ublock-origin
-    otf-commit-mono-nerd
-    ttf-bigblueterminal-nerd
     noto-fonts-emoji
+    ttf-nerd-fonts-symbols-mono
     unzip
 )
