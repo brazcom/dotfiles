@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH="$HOME/.config/scripts:$PATH"
+
 # config "desktop"
 {{ if eq .chezmoi.hostname "desktop" }}
 
@@ -18,5 +20,5 @@ xset s noblank
 
 slstatus &
 ~/.fehbg &
-kitty -e ~/.config/welcome &
+kitty -e /home/mattia/.config/welcome &
 exec dwm
