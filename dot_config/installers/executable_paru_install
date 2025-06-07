@@ -7,24 +7,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Pacchetti ufficiali da installare con pacman
-PACMAN_PKGS=(
-    git
-    chezmoi
-    kitty
-    lsd
-    pass
-    feh
-    mc
-    qbittorrent
-    rofi
-    cmus
-    xclip
-    maim
-    mpv
-    micro
-    firefox-ublock-origin
-    otf-commit-mono-nerd
-)
+#PACMAN_PKGS=(
+#    git
+#)
 
 # Installa pacchetti ufficiali
 echo "🔧 Installazione pacchetti ufficiali con pacman..."
