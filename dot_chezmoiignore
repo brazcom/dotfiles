@@ -3,3 +3,5 @@
 .config/slstatus/*.o
 .config/slstatus/slstatus
 .config/mc/ini
+.config/dmenu/*.o
+.config/dmenu/dmenu
