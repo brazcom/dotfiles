@@ -15,7 +15,6 @@ PACMAN_PKGS=(
     feh
     mc
     qbittorrent
-    rofi
     cmus
     xclip
     xdotool
@@ -24,7 +23,6 @@ PACMAN_PKGS=(
     xorg-setxkbmap
     xorg-xinit
     xorg-xrandr
-    rofi-emoji
     nano
     libx11
     gnupg
@@ -36,4 +34,5 @@ PACMAN_PKGS=(
     otf-commit-mono-nerd
     ttf-bigblueterminal-nerd
     noto-fonts-emoji
+    unzip
 )

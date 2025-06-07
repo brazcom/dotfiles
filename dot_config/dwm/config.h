@@ -61,6 +61,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *browsercmd[]      = { "firefox", NULL };
+static const char *notesmenu[] = { "/home/mattia/.config/scripts/dmenunotes", NULL };
+static const char *sysmenu[] = { "/home/mattia/.config/scripts/dmenusys", NULL };
 
 #include <X11/XF86keysym.h>
 
@@ -70,9 +72,10 @@ static const Key keys[] = {
 	{ MODKEY,		                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,               		XK_F1,     spawn,          {.v = browsercmd } },
 	{ MODKEY,               		XK_z,      spawn,          {.v = browsercmd } },
-	{ CTRL,                         XK_space,  spawn,          SHCMD("rofi -modi drun,run -show drun") },
-	{ MODKEY,           		    XK_Delete, spawn,          SHCMD("rofi -show power-menu -modi power-menu:rofi-power-menu") },
-	{ MODKEY,                       XK_e,      spawn,          SHCMD("rofi -show emoji -modi emoji") },
+	{ CTRL,                         XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_n,      spawn,          {.v = notesmenu } },
+	{ MODKEY,                       XK_Delete, spawn,          {.v = sysmenu } },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD("bemoji") },
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("maim ~/Pictures/screenshot-$(date +%F_%T).png") },
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("maim -i $(xdotool getactivewindow) ~/Pictures/screenshot-window-$(date +%F_%T).png") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },

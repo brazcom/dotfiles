@@ -8,6 +8,7 @@ end
 echo "ciao!!"
 
 export PATH="$PATH:$HOME/.config/scripts"
+export MICRO_TRUECOLOR=1
 
 # Avvia ssh-agent se non è già in esecuzione
 if not pgrep -u (whoami) ssh-agent > /dev/null

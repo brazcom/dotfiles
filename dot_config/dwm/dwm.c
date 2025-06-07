@@ -446,19 +446,29 @@ buttonpress(XEvent *e)
 		focus(NULL);
 	}
 	if (ev->window == selmon->barwin) {
-		i = x = 0;
-		do
-			x += TEXTW(tags[i]);
-		while (ev->x >= x && ++i < LENGTH(tags));
-		if (i < LENGTH(tags)) {
-			click = ClkTagBar;
-			arg.ui = 1 << i;
-		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
-			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
-			click = ClkStatusText;
-		else
-			click = ClkWinTitle;
+	    // scroll volume
+	    if (ev->button == Button4) { // rotella su
+	        spawn(&(const Arg){ .v = (const char*[]){"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL} });
+	        return; // evita di propagare ulteriormente l'evento
+	    } else if (ev->button == Button5) { // rotella giù
+	        spawn(&(const Arg){ .v = (const char*[]){"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL} });
+	        return;
+	    }
+	    
+	    // codice originale per determinare click su barra
+	    i = x = 0;
+	    do
+	        x += TEXTW(tags[i]);
+	    while (ev->x >= x && ++i < LENGTH(tags));
+	    if (i < LENGTH(tags)) {
+	        click = ClkTagBar;
+	        arg.ui = 1 << i;
+	    } else if (ev->x < x + TEXTW(selmon->ltsymbol))
+	        click = ClkLtSymbol;
+	    else if (ev->x > selmon->ww - (int)TEXTW(stext))
+	        click = ClkStatusText;
+	    else
+	        click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
 		restack(selmon);
