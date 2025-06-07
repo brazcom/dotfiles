@@ -7,7 +7,7 @@ sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null <<EOF
 [Service]
 ExecStart=
-ExecStart=-/usr/bin/agetty --autologin mattia --noclear %I \$TERM
+ExecStart=-/usr/bin/agetty --skip-login --nonewline --noissue --autologin mattia --noclear %I $TERM
 EOF
 
 # Ricarica i processi di sistema per applicare le modifiche
