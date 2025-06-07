@@ -16,7 +16,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#373b41";
+static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -50,8 +50,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define CTRL ControlMask
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -64,44 +63,22 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "kitty", NULL };
-static const char *browsercmd[]      = { "firefox", NULL };
-static const char *notesmenu[] = { "/home/mattia/.config/scripts/dmenunotes", NULL };
-static const char *sysmenu[] = { "/home/mattia/.config/scripts/dmenusys", NULL };
-
-#include <X11/XF86keysym.h>
+static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,		                XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,               		XK_F1,     spawn,          {.v = browsercmd } },
-	{ MODKEY,               		XK_z,      spawn,          {.v = browsercmd } },
-	{ CTRL,                         XK_space,  spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_n,      spawn,          {.v = notesmenu } },
-	{ MODKEY,                       XK_Delete, spawn,          {.v = sysmenu } },
-	{ MODKEY,                       XK_e,      spawn,          SHCMD("bemoji") },
-	{ MODKEY,                       XK_Print,  spawn,          SHCMD("maim ~/Pictures/screenshot-$(date +%F_%T).png") },
-	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("maim -i $(xdotool getactivewindow) ~/Pictures/screenshot-window-$(date +%F_%T).png") },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	// Volume Up
-	{ 0, XF86XK_AudioRaiseVolume,			   spawn, 		   SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +10%") },
-	
-	// Volume Down
-	{ 0, XF86XK_AudioLowerVolume,			   spawn,		   SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -10%") },
-	
-	// Mute
-	{ 0, XF86XK_AudioMute,       			   spawn, 		   SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
-	
-	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_plus,   zoom,           {0} },
+	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,		                XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -113,8 +90,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|CTRL,          		XK_Left,   view,           {.i = -1 } },
-	{ MODKEY|CTRL,          		XK_Right,  view,           {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -131,8 +106,8 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
+	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
