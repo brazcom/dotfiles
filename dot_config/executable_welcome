@@ -3,5 +3,3 @@ figlet "SUCK LESS" -f "Cosmike" -d ~/.config/figletfonts/ -w 80
 echo "   "
 echo "   "
 fastfetch --logo none
-echo "   "
-read -P "Ready? GO!"
