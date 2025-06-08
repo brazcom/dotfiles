@@ -1,0 +1,33 @@
+#!/usr/bin/env fish
+
+echo "   "
+
+# Dracula RGB palette
+colors=(
+  "139;233;253"  # Cyan
+  "80;250;123"   # Green
+  "255;184;108"  # Orange
+  "255;121;198"  # Pink
+  "189;147;249"  # Purple
+  "255;85;85"    # Red
+  "241;250;140"  # Yellow
+)
+
+# Scegli colore random
+rand_color=${colors[$RANDOM % ${#colors[@]}]}
+
+# Testo da visualizzare
+TEXT=${1:-"SUCK LESS"}
+
+# Esegui figlet e colora riga per riga
+figlet "$TEXT" -f "Cosmike" -d ~/.config/figletfonts/ -w 80 | \
+  awk -v color="$rand_color" '{print "\033[38;2;" color "m" $0 "\033[0m"}'
+
+
+echo "   "
+
+fastfetch --logo none
+
+echo "   "
+
+systemd-analyze

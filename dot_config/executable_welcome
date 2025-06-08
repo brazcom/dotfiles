@@ -1,8 +1,0 @@
-#!/usr/bin/env fish
-
-echo "   "
-echo "   "
-figlet "SUCK LESS" -f "Cosmike" -d ~/.config/figletfonts/ -w 80
-echo "   "
-echo "   "
-fastfetch --logo none

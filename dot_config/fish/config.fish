@@ -30,7 +30,7 @@ alias ll='exa -alh'
 alias cdwm='chezmoi edit ~/.config/dwm/config.h; chezmoi apply'
 alias mdwm='cd ~/.config/dwm; sudo make clean install'
 alias cfish='chezmoi edit ~/.config/fish/config.fish; chezmoi apply'
-alias infoz='./.config/welcome'
+alias infoz='cd ~/.config/misc; bash welcome; cd'
 
 # ===== SSH AGENT AUTO-START =====
 # Configurazione automatica per ssh-agent
