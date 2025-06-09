@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Ranger
-Exec=kitty -e ranger
-Keywords=rngr

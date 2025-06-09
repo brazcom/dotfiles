@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Midnight Commander
-Exec=kitty -e mc
-Keywords=mc
