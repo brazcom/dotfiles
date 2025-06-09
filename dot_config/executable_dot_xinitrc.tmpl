@@ -1,15 +1,11 @@
 #!/bin/bash
 
-[ -n "$DISPLAY" ] && exit 0
-export PATH="$HOME/.config/scripts:$PATH"
+# Imposta tipo di sessione
 export XDG_SESSION_TYPE=x11
-export XAUTHORITY="$HOME/.config/.Xauthority"
-
-[ ! -f "$XAUTHORITY" ] && touch "$XAUTHORITY"
 
 # Config "desktop"
 {{ if eq .chezmoi.hostname "desktop" }}
-command -v xrandr >/dev/null && xrandr --output HDMI-0 --mode 2560x1440 --rate 99.97
+xrandr --output HDMI-0 --mode 2560x1440 --rate 99.97
 xset s off
 xset -dpms
 xset s noblank
@@ -21,5 +17,5 @@ xset s noblank
 
 # Config comuni
 slstatus & disown
-~/.fehbg & disown
+~/.config/.fehbg & disown
 exec dwm
