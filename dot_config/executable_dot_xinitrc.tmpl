@@ -1,0 +1,25 @@
+#!/bin/bash
+
+[ -n "$DISPLAY" ] && exit 0
+export PATH="$HOME/.config/scripts:$PATH"
+export XDG_SESSION_TYPE=x11
+export XAUTHORITY="$HOME/.config/.Xauthority"
+
+[ ! -f "$XAUTHORITY" ] && touch "$XAUTHORITY"
+
+# Config "desktop"
+{{ if eq .chezmoi.hostname "desktop" }}
+command -v xrandr >/dev/null && xrandr --output HDMI-0 --mode 2560x1440 --rate 99.97
+xset s off
+xset -dpms
+xset s noblank
+
+# Config "laptop"
+# {{ else if eq .chezmoi.hostname "laptop" }}
+# xrandr --output eDP-1 --mode 1920x1080 --rate 60
+{{ end }}
+
+# Config comuni
+slstatus & disown
+~/.fehbg & disown
+exec dwm
