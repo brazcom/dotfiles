@@ -1,14 +1,7 @@
 if status is-login
     if test -z "$DISPLAY"; and test "$XDG_VTNR" = "1"
         set -x XAUTHORITY "$XDG_RUNTIME_DIR/Xauthority"
-
-        # Log diagnostico su file
-        echo "Starting X at (date)" >> ~/.config/.xsession.log
-
-        # Avvia startx e salva output su file di log per debug
-        startx ~/.config/.xinitrc >> ~/.config/.xsession.log 2>&1
-
-        # Dopo startx, esci dalla shell
+        startx ~/.config/.xinitrc
         exit
     end
 end
