@@ -92,6 +92,9 @@ static const Key keys[] = {
 	
 	// Mute
 	{ 0, XF86XK_AudioMute,       			   spawn, 		   SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
+
+	{ 0, XF86XK_Calculator, 				   spawn, 		   SHCMD("~/.config/scripts/kbswitch") },
+
 	
 	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
