@@ -1,0 +1,9 @@
+#!/bin/bash
+
+current=$(setxkbmap -query | awk '/variant:/ { print $2 }')
+
+if [[ "$current" == "intl" ]]; then
+    setxkbmap us
+else
+    setxkbmap us -variant intl
+fi
