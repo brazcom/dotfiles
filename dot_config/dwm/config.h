@@ -85,13 +85,14 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("maim -i $(xdotool getactivewindow) ~/Pictures/screenshot-window-$(date +%F_%T).png") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	// Volume Up
-	{ 0, XF86XK_AudioRaiseVolume,			   spawn, 		   SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +10%") },
+	{ 0, XF86XK_AudioRaiseVolume, 			   spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1") },
 	
 	// Volume Down
-	{ 0, XF86XK_AudioLowerVolume,			   spawn,		   SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -10%") },
+	{ 0, XF86XK_AudioLowerVolume, 			   spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") },
 	
 	// Mute
-	{ 0, XF86XK_AudioMute,       			   spawn, 		   SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
+	{ 0, XF86XK_AudioMute, 					   spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ toggle") },
+	
 
 	{ 0, XF86XK_Calculator, 				   spawn, 		   SHCMD("~/.config/scripts/kbswitch") },
 

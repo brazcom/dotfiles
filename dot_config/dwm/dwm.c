@@ -480,10 +480,10 @@ buttonpress(XEvent *e)
 	if (ev->window == selmon->barwin) {
 	// scroll volume
 	if (ev->button == Button4) { // rotella su
-	    spawn(&(const Arg){ .v = (const char*[]){"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL} });
+	    spawn(&(const Arg){ .v = (const char*[]){"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", "-l", "1", NULL} });
 	    return; // evita di propagare ulteriormente l'evento
 	} else if (ev->button == Button5) { // rotella giù
-	    spawn(&(const Arg){ .v = (const char*[]){"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL} });
+	    spawn(&(const Arg){ .v = (const char*[]){"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "2%-", NULL} });
 	    return;
 	}
 	
