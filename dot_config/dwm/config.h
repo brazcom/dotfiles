@@ -25,6 +25,8 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "󰆢", "󱗽", "󰆢", "󱗽", "󰆢", "󱗽", "󰆢", "󱗽", "󰆢" };
+#define NUMTAGS (sizeof(tags) / sizeof(*tags))
+
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -96,15 +98,14 @@ static const Key keys[] = {
 
 	{ 0, XF86XK_Calculator, 				   spawn, 		   SHCMD("~/.config/scripts/kbswitch") },
 
-	
+	{ MODKEY, 						XK_r, 	   resetall, 	   {0} },
 	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_plus,   zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY,                       XK_Tab,    zoom,           {0} },
 	{ MODKEY,		                XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
@@ -113,12 +114,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|CTRL,          		XK_Left,   view,           {.i = -1 } },
-	{ MODKEY|CTRL,          		XK_Right,  view,           {.i = +1 } },
+	{ MODKEY|ControlMask, 			XK_Right,  viewnext, 	   {0} },
+	{ MODKEY|ControlMask, 			XK_Left,   viewprev, 	   {0} },
+	{ MODKEY|ShiftMask, 			XK_Right,  tagnext, 	   {0} },
+	{ MODKEY|ShiftMask, 			XK_Left,   tagprev, 	   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
