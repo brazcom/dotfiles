@@ -266,6 +266,12 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+/* my custom functions */
+static void resetall(const Arg *arg);
+static void viewnext(const Arg *arg);
+static void viewprev(const Arg *arg);
+static void tagprev (const Arg *arg);
+static void tagnext (const Arg *arg);
 
 /* variables */
 static Systray *systray = NULL;
@@ -2525,13 +2531,23 @@ void
 zoom(const Arg *arg)
 {
 	Client *c = selmon->sel;
+	Client *at = nexttiled(selmon->clients);
 
 	if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
 		return;
-	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
-		return;
-	pop(c);
+
+	if (c == at)
+		if (!(at = nexttiled(c->next)))
+			return;
+
+	detach(c);
+	c->next = selmon->clients;
+	selmon->clients = c;
+
+	focus(c);
+	arrange(selmon);
 }
+
 
 int
 main(int argc, char *argv[])
@@ -2556,3 +2572,61 @@ main(int argc, char *argv[])
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
 }
+
+/* my custom functions */
+static void
+resetall(const Arg *arg)
+{
+	Client *c;
+	for (c = selmon->clients; c; c = c->next)
+		if (ISVISIBLE(c))
+			c->isfloating = 0;
+	arrange(selmon);
+}
+
+void
+viewnext(const Arg *arg)
+{
+	int i = selmon->tagset[selmon->seltags];
+	i = (i << 1) | (i >> (NUMTAGS - 1));
+	const Arg a = {.ui = i & TAGMASK};
+	view(&a);
+}
+
+void
+viewprev(const Arg *arg)
+{
+	int i = selmon->tagset[selmon->seltags];
+	i = (i >> 1) | (i << (NUMTAGS - 1));
+	const Arg a = {.ui = i & TAGMASK};
+	view(&a);
+}
+
+void
+tagnext(const Arg *arg)
+{
+	unsigned int newtag = 0;
+	for (int i = 0; i < NUMTAGS; i++) {
+		if (selmon->sel->tags & (1 << i)) {
+			newtag = (1 << ((i + 1) % NUMTAGS));
+			break;
+		}
+	}
+	const Arg a = {.ui = newtag};
+	tag(&a);
+}
+
+void
+tagprev(const Arg *arg)
+{
+	unsigned int newtag = 0;
+	for (int i = 0; i < NUMTAGS; i++) {
+		if (selmon->sel->tags & (1 << i)) {
+			newtag = (1 << ((i - 1 + NUMTAGS) % NUMTAGS));
+			break;
+		}
+	}
+	const Arg a = {.ui = newtag};
+	tag(&a);
+}
+
