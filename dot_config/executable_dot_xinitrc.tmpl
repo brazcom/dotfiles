@@ -9,6 +9,7 @@ xrandr --output HDMI-0 --mode 2560x1440 --rate 99.97
 xset s off
 xset -dpms
 xset s noblank
+xmodmap ~/.config/.Xmodmap &
 
 # Config "laptop"
 # {{ else if eq .chezmoi.hostname "laptop" }}

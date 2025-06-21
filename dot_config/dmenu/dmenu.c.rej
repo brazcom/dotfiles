@@ -1,0 +1,12 @@
+--- dmenu.c
++++ dmenu.c
+@@ -758,7 +800,8 @@ static void
+ usage(void)
+ {
+ 	die("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+-	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]");
++	    "             [-nb color] [-nf color] [-sb color] [-sf color]\n"
++	    "             [-nhb color] [-nhf color] [-shb color] [-shf color] [-w windowid]");
+ }
+ 
+ int

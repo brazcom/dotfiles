@@ -70,6 +70,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *browsercmd[]      = { "firefox", NULL };
 static const char *notesmenu[] = { "/home/mattia/.config/scripts/dmenunotes", NULL };
 static const char *sysmenu[] = { "/home/mattia/.config/scripts/dmenusys", NULL };
+static const char *tracksmenu[] = { "/home/mattia/.config/scripts/dmenucmustrax", NULL };
 
 #include <X11/XF86keysym.h>
 
@@ -82,6 +83,7 @@ static const Key keys[] = {
 	{ CTRL,                         XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = notesmenu } },
 	{ MODKEY,                       XK_Delete, spawn,          {.v = sysmenu } },
+	{ MODKEY,                       XK_a, 	   spawn,          {.v = tracksmenu } },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD("bemoji") },
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("maim ~/Pictures/screenshot-$(date +%F_%T).png") },
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("maim -i $(xdotool getactivewindow) ~/Pictures/screenshot-window-$(date +%F_%T).png") },
