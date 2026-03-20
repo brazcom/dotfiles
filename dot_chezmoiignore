@@ -1,7 +1,18 @@
+# build artifacts
 .config/dwm/*.o
 .config/dwm/dwm
 .config/slstatus/*.o
 .config/slstatus/slstatus
-.config/mc/ini
 .config/dmenu/*.o
 .config/dmenu/dmenu
+
+# mc runtime
+.config/mc/ini
+
+# merge / patch junk
+*.orig
+*.rej
+
+# backup files
+*.bak
+*backup*

@@ -37,3 +37,7 @@ alias ll='exa -alh'
 alias cdwm='chezmoi edit ~/.config/dwm/config.h; chezmoi apply'
 alias mdwm='cd ~/.config/dwm; sudo make clean install'
 alias cfish='chezmoi edit ~/.config/fish/config.fish; chezmoi apply'
+
+# pyenv (safe for fish)
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin

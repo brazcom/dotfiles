@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# PATH per dwm / dmenu
+export PATH="$HOME/.local/bin:$PATH"
+
 # Imposta tipo di sessione
 export XDG_SESSION_TYPE=x11
 
@@ -12,8 +15,8 @@ xset s noblank
 xmodmap ~/.config/.Xmodmap &
 
 # Config "laptop"
-# {{ else if eq .chezmoi.hostname "laptop" }}
-# xrandr --output eDP-1 --mode 1920x1080 --rate 60
+{{ else if eq .chezmoi.hostname "laptop" }}
+xrandr --output eDP-1 --mode 1920x1080 --rate 60
 {{ end }}
 
 # Config comuni

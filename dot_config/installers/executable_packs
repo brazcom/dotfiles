@@ -34,4 +34,10 @@ PACMAN_PKGS=(
     noto-fonts-emoji
     ttf-nerd-fonts-symbols-mono
     unzip
+    base-devel
+    libxft
+    libxinerama
+    freetype2
+    xorg-xset
+    xorg-xmodmap
 )
