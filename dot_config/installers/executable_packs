@@ -8,6 +8,9 @@ fi
 
 PACMAN_PKGS=(
     base
+    android-file-transfer
+    libmtp
+    fuse2
     base-devel
     bemoji
     calc
