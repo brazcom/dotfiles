@@ -18,6 +18,7 @@ end
 set -gx PATH $PATH $HOME/.config/scripts
 set -gx MICRO_TRUECOLOR 1
 set -gx EDITOR micro
+set -x CALCHISTFILE ~/.local/state/calc/history
 
 alias ls='lsd'
 alias tree='exa --tree'
