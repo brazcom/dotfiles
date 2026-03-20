@@ -8,6 +8,7 @@ fi
 
 PACMAN_PKGS=(
     git
+    fish
     chezmoi
     kitty
     lsd
@@ -40,4 +41,5 @@ PACMAN_PKGS=(
     freetype2
     xorg-xset
     xorg-xmodmap
+    github-cli
 )
