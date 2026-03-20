@@ -7,39 +7,58 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 PACMAN_PKGS=(
-    git
-    fish
+    base
+    base-devel
+    bemoji
     chezmoi
-    kitty
-    lsd
-    pass
-    feh
-    mc
-    qbittorrent
     cmus
+    dhcpcd
+    efibootmgr
+    fastfetch
+    feh
+    figlet
+    firefox
+    firefox-ublock-origin
+    fish
+    freetype2
+    git
+    github-cli
+    gnupg
+    gst-plugin-pipewire
+    htop
+    kitty
+    libx11
+    libxft
+    libxinerama
+    linux
+    linux-firmware
+    lsd
+    maim
+    mc
+    micro
+    mesa
+    mpv
+    noto-fonts-emoji
+    openssh
+    pass
+    pipewire
+    pipewire-alsa
+    pipewire-jack
+    pipewire-pulse
+    qbittorrent
+    ttf-nerd-fonts-symbols-mono
+    ufw
+    unzip
+    vulkan-icd-loader
+    wget
+    wireplumber
     xclip
     xdotool
     xorg-server
-    xorg-server-common
     xorg-setxkbmap
     xorg-xinit
-    xorg-xrandr
-    nano
-    libx11
-    gnupg
-    openssh
-    maim
-    mpv
-    micro
-    firefox-ublock-origin
-    noto-fonts-emoji
-    ttf-nerd-fonts-symbols-mono
-    unzip
-    base-devel
-    libxft
-    libxinerama
-    freetype2
-    xorg-xset
     xorg-xmodmap
-    github-cli
+    xorg-xrandr
+    xorg-xset
+    zram-generator
 )
