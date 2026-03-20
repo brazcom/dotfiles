@@ -19,6 +19,7 @@ set -gx PATH $PATH $HOME/.config/scripts
 set -gx MICRO_TRUECOLOR 1
 set -gx EDITOR micro
 set -x CALCHISTFILE ~/.local/state/calc/history
+set -Ux FIGLET_FONTDIR ~/.config/figletfonts
 
 alias ls='lsd'
 alias tree='exa --tree'
