@@ -1,6 +1,6 @@
 #!/bin/bash
+set -e
 
-# Verifica che lo script sia eseguito come root
 if [[ $EUID -ne 0 ]]; then
     echo "Per favore esegui questo script con sudo o come root."
     exit 1
@@ -12,7 +12,6 @@ PACMAN_PKGS=(
     libmtp
     fuse2
     base-devel
-    bemoji
     calc
     chezmoi
     cmus
@@ -66,3 +65,5 @@ PACMAN_PKGS=(
     xorg-xset
     zram-generator
 )
+
+pacman -Syu --needed "${PACMAN_PKGS[@]}"
