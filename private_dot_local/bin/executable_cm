@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# File: /home/mattia/WORK/monitor.sh
+# Aggiornato: 2026-03-22 - Fix parsing e output file datato
+
+DATE=$(date '+%Y-%m-%d')
+TIME=$(date '+%H:%M')
+OUTFILE="output-$DATE.md"
+
+# Lista asset corretta per Coinpaprika
+ASSETS=(
+    "btc-bitcoin" "eth-ethereum" "sol-solana" "xmr-monero" 
+    "zano-zano" "zama-zama" "dcr-decred" "grin-grin" 
+    "zec-zcash" "sui-sui" "nexo-nexo" "aave-new"
+    "s-sonic" "apt-aptos"
+)
+
+# Header a video e su file
+HEADER="====================================================
+      MONITORAGGIO CRYPTO - $DATE $TIME
+====================================================
+| Asset           | Prezzo (USD) | Var 24h  |
+| :-------------- | :----------- | :------- |"
+
+echo "$HEADER" > "$OUTFILE"
+echo "$HEADER"
+
+for coin in "${ASSETS[@]}"; do
+    # Esegue il comando e cattura l'output
+    RAW=$(/home/mattia/.local/bin/coinpaprika-cli ticker "$coin")
+    
+    # Estrae il simbolo (es: BTC)
+    SYMBOL=$(echo "$RAW" | grep "Symbol" | awk -F'│' '{print $3}' | xargs)
+    
+    # Estrae il prezzo (es: $68877.58)
+    PRICE=$(echo "$RAW" | grep "Price (USD)" | awk -F'│' '{print $3}' | xargs)
+    
+    # Estrae la variazione 24h (es: -2.40%)
+    CHANGE=$(echo "$RAW" | grep "Change (24h)" | awk -F'│' '{print $3}' | xargs)
+
+    # Se i dati sono vuoti (errore API), imposta placeholder
+    [ -z "$SYMBOL" ] && SYMBOL=$coin
+    [ -z "$PRICE" ] && PRICE="N/A"
+    [ -z "$CHANGE" ] && CHANGE="N/A"
+
+    LINE="| $(printf "%-14s" "$SYMBOL") | $(printf "%-12s" "$PRICE") | $(printf "%-8s" "$CHANGE") |"
+    
+    echo "$LINE" >> "$OUTFILE"
+    echo "$LINE"
+done
+
+FOOTER="----------------------------------------------------
+Report salvato in: $OUTFILE"
+echo "$FOOTER" >> "$OUTFILE"
+echo "$FOOTER"

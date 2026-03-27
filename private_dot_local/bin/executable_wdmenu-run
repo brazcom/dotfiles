@@ -1,0 +1,6 @@
+#!/bin/sh
+# PATH stabile per dmenu (indipendente da fish)
+export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin"
+
+cmd="$(dmenu_path | dmenu -i "$@")"
+[ -n "$cmd" ] && setsid -f /bin/sh -c "$cmd" >/dev/null 2>&1

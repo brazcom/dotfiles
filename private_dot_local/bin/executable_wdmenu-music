@@ -1,0 +1,12 @@
+#!/bin/bash
+MUSIC_DIR="/mnt/MEDIA2/Music"
+
+# Estrai tutti i brani
+TRACKS=$(find "$MUSIC_DIR" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.ogg" \) | sort)
+
+# Selezione fuzzy con dmenu
+SELECTED=$(printf '%s\n' "$TRACKS" | dmenu -i -l 20 -F -p "🎵 Aggiungi brano >")
+
+if [ -n "$SELECTED" ]; then
+    cmus-remote -q "$SELECTED"
+fi

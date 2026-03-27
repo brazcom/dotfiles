@@ -1,0 +1,46 @@
+#!/usr/bin/env fish
+
+if test (count $argv) -ge 1
+    set dir $argv[1]
+else
+    set dir (pwd)
+end
+
+if not test -d "$dir"
+    echo "Directory non valida: $dir"
+    exit 1
+end
+
+set started_now 0
+
+if not pgrep -x cmus >/dev/null
+    set started_now 1
+    kitty -e cmus >/dev/null 2>&1 &
+end
+
+for i in (seq 1 50)
+    cmus-remote -C "status" >/dev/null 2>&1
+    and break
+    sleep 0.2
+end
+
+cmus-remote -C "status" >/dev/null 2>&1
+or begin
+    echo "cmus non raggiungibile"
+    exit 1
+end
+
+# Se cmus è stato appena lanciato, fermalo subito per evitare autoplay
+if test $started_now -eq 1
+    cmus-remote -C "player-stop"
+    sleep 0.1 # workaround race condition cmus startup (aumentare se serve)
+end
+
+# Svuota solo la queue
+cmus-remote -C "clear -q"
+
+# Aggiunge ricorsivamente la cartella corrente alla queue
+cmus-remote -C "add -q $dir"
+
+# Fa partire la queue preparata
+cmus-remote -C "player-play"

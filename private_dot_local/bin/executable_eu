@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import urllib.request
+import json
+import sys
+
+def get_eur_usd():
+    url = "https://api.frankfurter.app/latest?from=EUR&to=USD"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req) as response:
+            data = json.loads(response.read().decode())
+            rate = data['rates']['USD']
+            return rate
+    except Exception as e:
+        print(f"Errore nel fetch del cambio: {e}")
+        sys.exit(1)
+
+def main():
+    rate = get_eur_usd()
+    
+    if len(sys.argv) > 1:
+        try:
+            amount_eur = float(sys.argv[1])
+            amount_usd = amount_eur * rate
+            print(f"Cambio EUR/USD: {rate:.4f}")
+            print(f"{amount_eur:.2f} EUR = {amount_usd:.2f} USD")
+        except ValueError:
+            print("Utilizzo: ./fx_rate.py [quantità_eur]")
+    else:
+        print(f"Cambio EUR/USD: {rate:.4f}")
+        print(f"1 EUR = {rate:.4f} USD")
+        print(f"1 USD = {1/rate:.4f} EUR")
+
+if __name__ == "__main__":
+    main()

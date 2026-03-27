@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+import json
+import os
+import subprocess
+import sys
+from datetime import datetime
+
+DB_FILE = os.path.expanduser("~/vaults/arch-vault/AIworkspace/Crypto/transactions.json")
+COINPAPRIKA_PATH = "/home/mattia/.local/bin/coinpaprika-cli"
+
+# Mappa per normalizzare ID vecchi o errati
+ID_MAP = {
+    "aave-new-aave": "aave-new",
+    "aave-aave": "aave-new",
+    "s-sonic-sonic": "s-sonic",
+    "aptos": "apt-aptos"
+}
+
+# Lista ufficiale dei ticker (per fzf)
+ASSETS = [
+    "btc-bitcoin", "eth-ethereum", "sol-solana", "xmr-monero", 
+    "zano-zano", "zama-zama", "dcr-decred", "grin-grin", 
+    "zec-zcash", "sui-sui", "nexo-nexo", "aave-new",
+    "s-sonic", "apt-aptos"
+]
+
+def normalize_id(coin_id):
+    return ID_MAP.get(coin_id, coin_id)
+
+def load_db():
+    if not os.path.exists(DB_FILE):
+        return []
+    with open(DB_FILE, 'r') as f:
+        return json.load(f)
+
+def save_db(data):
+    with open(DB_FILE, 'w') as f:
+        json.dump(data, f, indent=4)
+
+def get_ticker_fzf():
+    input_str = "\n".join(ASSETS)
+    try:
+        process = subprocess.Popen(['fzf', '--header', 'Seleziona Token'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        stdout, _ = process.communicate(input=input_str)
+        return stdout.strip()
+    except FileNotFoundError:
+        print("Errore: fzf non trovato. Installalo con 'paru -S fzf'")
+        sys.exit(1)
+
+def get_current_price(coin_id):
+    coin_id = normalize_id(coin_id)
+    try:
+        # Silenzia stderr per non mostrare errori API brutti nel report
+        raw = subprocess.check_output([COINPAPRIKA_PATH, "ticker", coin_id], text=True, stderr=subprocess.DEVNULL)
+        for line in raw.split('\n'):
+            if "Price (USD)" in line:
+                return float(line.split('│')[2].replace('$', '').replace(',', '').strip())
+    except Exception:
+        return None
+    return None
+
+def add_transaction():
+    coin_id = get_ticker_fzf()
+    if not coin_id: return
+    coin_id = normalize_id(coin_id)
+
+    print(f"\n--- Nuova Transazione per {coin_id.upper()} ---")
+    type_tx = input("Tipo (B per Buy, S per Sell) [B]: ").upper() or "B"
+    try:
+        qty = float(input("Quantità: "))
+        price = float(input("Prezzo Unitario (USD): "))
+        fees = float(input("Commissioni (USD) [0]: ") or 0)
+    except ValueError:
+        print("Errore: Inserisci numeri validi.")
+        return
+
+    db = load_db()
+    db.append({
+        "date": datetime.now().isoformat(),
+        "id": coin_id,
+        "type": "BUY" if type_tx == "B" else "SELL",
+        "qty": qty,
+        "price": price,
+        "fees": fees
+    })
+    save_db(db)
+    print("\n✅ Transazione salvata con successo!")
+
+def remove_transaction():
+    db = load_db()
+    if not db:
+        print("Nessuna transazione trovata.")
+        return
+
+    # Crea lista formattata per fzf: "ID | DATA | TIPO | QTY | PREZZO"
+    lines = []
+    for i, tx in enumerate(db):
+        date_short = tx['date'].split('T')[0]
+        lines.append(f"{i} | {tx['id']:<12} | {date_short} | {tx['type']:<4} | {tx['qty']:>10.4f} @ ${tx['price']:<8.2f}")
+
+    input_str = "\n".join(lines)
+    try:
+        process = subprocess.Popen(['fzf', '--header', 'Seleziona transazione da RIMUOVERE'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        stdout, _ = process.communicate(input=input_str)
+        if not stdout: return
+        
+        idx = int(stdout.split('|')[0].strip())
+        removed = db.pop(idx)
+        save_db(db)
+        print(f"\n✅ Rimossa: {removed['id']} ({removed['type']} {removed['qty']})")
+    except (FileNotFoundError, ValueError, IndexError):
+        print("Errore nella rimozione.")
+
+def show_report():
+    db = load_db()
+    if not db:
+        print("Nessuna transazione trovata.")
+        return
+
+    portfolio = {}
+    for tx in db:
+        coin = normalize_id(tx['id'])
+        if coin not in portfolio:
+            portfolio[coin] = {"total_qty": 0, "total_cost": 0}
+        
+        if tx['type'] == "BUY":
+            portfolio[coin]["total_qty"] += tx['qty']
+            portfolio[coin]["total_cost"] += (tx['qty'] * tx['price']) + tx['fees']
+        else:
+            avg_price = portfolio[coin]["total_cost"] / portfolio[coin]["total_qty"] if portfolio[coin]["total_qty"] > 0 else 0
+            portfolio[coin]["total_qty"] -= tx['qty']
+            portfolio[coin]["total_cost"] -= (tx['qty'] * avg_price)
+
+    print("\n" + "="*105)
+    print(f"{'ASSET':<15} | {'QTY':<10} | {'PMC':<10} | {'LIVE':<10} | {'DELTA %':<10} | {'DELTA USD':<12}")
+    print("-" * 105)
+
+    total_invested = 0
+    total_current_value = 0
+    asset_values = {}
+
+    for coin, data in portfolio.items():
+        if data['total_qty'] <= 0: continue
+        
+        pmc = data['total_cost'] / data['total_qty']
+        live_price = get_current_price(coin)
+        
+        if live_price:
+            current_val = data['total_qty'] * live_price
+            total_invested += data['total_cost']
+            total_current_value += current_val
+            asset_values[coin] = current_val
+            
+            delta_usd = current_val - data['total_cost']
+            delta_pct = (delta_usd / data['total_cost']) * 100 if data['total_cost'] > 0 else 0
+            
+            color = "\033[92m" if delta_usd >= 0 else "\033[91m"
+            reset = "\033[0m"
+            print(f"{coin:<15} | {data['total_qty']:<10.4f} | ${pmc:<9.2f} | ${live_price:<9.2f} | {color}{delta_pct:>+8.2f}%{reset} | {color}${delta_usd:>10.2f}{reset}")
+        else:
+            print(f"{coin:<15} | {data['total_qty']:<10.4f} | ${pmc:<9.2f} | {'N/A':<9} | {'N/A':>8} | {'N/A':<12}")
+
+    print("-" * 105)
+    
+    if total_invested > 0:
+        total_delta_usd = total_current_value - total_invested
+        total_delta_pct = (total_delta_usd / total_invested) * 100
+        color = "\033[92m" if total_delta_usd >= 0 else "\033[91m"
+        reset = "\033[0m"
+        
+        print(f"{'VALORE TOTALE:':<15} ${total_current_value:<10.2f}")
+        print(f"{'DELTA TOTALE:':<15} {color}${total_delta_usd:<10.2f} ({total_delta_pct:>+6.2f}%){reset}")
+        
+        # Pie Chart Alternativa (Distribuzione USD)
+        print("\nDISTRIBUZIONE PORTAFOGLIO (USD %):")
+        for coin, val in sorted(asset_values.items(), key=lambda x: x[1], reverse=True):
+            pct = (val / total_current_value) * 100
+            bar = "█" * int(pct / 2)
+            print(f"{coin:<15} | {pct:>5.1f}% | {bar}")
+    
+    print("="*105 + "\n")
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "report":
+        show_report()
+    else:
+        print("1. Aggiungi Transazione")
+        print("2. Rimuovi Transazione")
+        print("3. Mostra Report Portafoglio")
+        choice = input("\nScegli: ")
+        if choice == "1": add_transaction()
+        elif choice == "2": remove_transaction()
+        elif choice == "3": show_report()

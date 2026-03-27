@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "   "
+
+TEXT=${1:-$'SUCK\nLESS'}
+
+printf "%s\n" "$TEXT" | figlet -f "ANSI Shadow" -d ~/.config/figletfonts/ -w 80 | lolcat
+
+echo "   "
+
+fastfetch --logo none
+
+echo "   "
+
+systemd-analyze

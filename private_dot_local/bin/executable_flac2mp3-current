@@ -1,0 +1,44 @@
+#!/usr/bin/env fish
+
+# Controlla se ffmpeg è installato
+if not type -q ffmpeg
+    echo "Errore: ffmpeg non trovato. Installa ffmpeg e riprova."
+    exit 1
+end
+
+# Cartella di input (default: quella corrente)
+set input_dir (pwd)
+
+# Cartella di output
+set output_dir "$input_dir/converted"
+
+# Crea la cartella di output se non esiste
+mkdir -p "$output_dir"
+
+# Cicla tutti i file FLAC nella cartella
+for file in $input_dir/*.flac
+    # Salta se non ci sono file FLAC
+    if test ! -e "$file"
+        echo "Nessun file .flac trovato in $input_dir"
+        break
+    end
+
+    # Nome base del file (senza estensione)
+    set base (basename "$file" .flac)
+
+    # File di output
+    set output "$output_dir/$base.mp3"
+
+    echo "🎧 Convertendo: $file → $output"
+
+    # Conversione con ffmpeg (320 kbps, copia tag)
+    ffmpeg -hide_banner -loglevel error -i "$file" -codec:a libmp3lame -b:a 320k -map_metadata 0 "$output"
+
+    if test $status -eq 0
+        echo "✅ Completato: $output"
+    else
+        echo "❌ Errore durante la conversione di $file"
+    end
+end
+
+echo "🏁 Conversione completata. File salvati in: $output_dir"

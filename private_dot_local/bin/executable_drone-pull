@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DEVICE="/dev/sdd"
+MOUNT_POINT="/mnt/usbdrive"
+SOURCE_DIR="$MOUNT_POINT/DCIM/DJI_001"
+DEST="$HOME/Downloads/Neoshots"
+
+UID_NUM="$(id -u)"
+GID_NUM="$(id -g)"
+
+echo "[+] Setup..."
+sudo mkdir -p "$MOUNT_POINT"
+mkdir -p "$DEST"
+
+if mountpoint -q "$MOUNT_POINT"; then
+    echo "[!] Già montato."
+else
+    echo "[+] Monto $DEVICE..."
+    sudo mount -o uid="$UID_NUM",gid="$GID_NUM" "$DEVICE" "$MOUNT_POINT"
+fi
+
+if [[ ! -d "$SOURCE_DIR" ]]; then
+    echo "[!] Sorgente non trovata: $SOURCE_DIR"
+    sudo umount "$MOUNT_POINT"
+    exit 1
+fi
+
+echo "[+] Trasferimento .mp4 con verifica..."
+
+find "$SOURCE_DIR" -maxdepth 1 -type f -iname "*.mp4" -print0 | while IFS= read -r -d '' src; do
+    filename="$(basename "$src")"
+    dest="$DEST/$filename"
+
+    # Copia se non esiste
+    if [[ ! -f "$dest" ]]; then
+        cp "$src" "$dest"
+        echo "    copiato: $filename"
+    else
+        echo "    già presente: $filename"
+    fi
+
+    # Verifica dimensione
+    src_size=$(stat -c%s "$src")
+    dest_size=$(stat -c%s "$dest")
+
+    if [[ "$src_size" -eq "$dest_size" ]]; then
+        rm -f "$src"
+        echo "    eliminato dal drone: $filename"
+    else
+        echo "    [!] mismatch dimensione, NON eliminato: $filename"
+    fi
+done
+
+echo "[+] Elimino .srt..."
+find "$MOUNT_POINT" -type f -iname "*.srt" -delete
+
+sync
+
+echo "[+] Smonto..."
+sudo umount "$MOUNT_POINT"
+
+echo "[+] Fine."

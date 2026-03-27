@@ -16,3 +16,5 @@
 # backup files
 *.bak
 *backup*
+
+.local/bin/Obsidian.AppImage

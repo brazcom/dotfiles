@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Controlli dipendenze
+for cmd in figlet fzf lolcat; do
+    command -v "$cmd" >/dev/null 2>&1 || {
+        echo "Errore: manca '$cmd'."
+        exit 1
+    }
+done
+
+# Directory font figlet più comuni
+FONT_DIRS=(
+    "$HOME/.config/figletfonts/"
+#    "/usr/share/figlet"
+#    "/usr/local/share/figlet"
+)
+
+# Raccoglie i font disponibili
+fonts=()
+for dir in "${FONT_DIRS[@]}"; do
+    if [[ -d "$dir" ]]; then
+        while IFS= read -r -d '' file; do
+            fonts+=("$(basename "${file%.*}")")
+        done < <(find "$dir" -maxdepth 1 -type f \( -name "*.flf" -o -name "*.tlf" \) -print0)
+    fi
+done
+
+# Rimuove duplicati e ordina
+mapfile -t fonts < <(printf '%s\n' "${fonts[@]}" | awk 'NF && !seen[$0]++' | sort)
+
+if [[ ${#fonts[@]} -eq 0 ]]; then
+    echo "Nessun font figlet trovato."
+    exit 1
+fi
+
+# Chiede il testo
+read -r -p "Inserisci il testo: " testo
+
+if [[ -z "${testo// }" ]]; then
+    echo "Testo vuoto."
+    exit 1
+fi
+
+# Selezione font con anteprima live
+font=$(
+    printf '%s\n' "${fonts[@]}" |
+        fzf \
+            --prompt="Scegli font > " \
+            --height=80% \
+            --reverse \
+            --border \
+            --preview-window=right:70%:wrap \
+            --preview='figlet -f {} "'"$testo"'" -t 2>/dev/null | lolcat'
+)
+
+if [[ -z "${font:-}" ]]; then
+    echo "Nessun font selezionato."
+    exit 0
+fi
+
+# Output finale
+clear
+figlet -f "$font" "$testo" -t | lolcat
