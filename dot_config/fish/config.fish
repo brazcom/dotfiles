@@ -23,6 +23,8 @@ abbr -a ff fastfetch
 abbr -a v micro
 abbr -a cf 'chezmoi edit ~/.config/fish/config.fish'
 abbr -a ytd "yt-dlp --remote-components ejs:github"
+abbr -a usb "mounter"
+#abbr -a zzd "glow $(fd -e md -e markdown . | fzf)"
 
 # confirm deleting files
 alias rm='rm -i'
@@ -37,9 +39,11 @@ alias l.='eza -ald .* --color=auto'
 
 alias chox="chmod +x"
 
+alias ky='kitty sh -lc '\''cd "$1" && exec yazi'\'' sh "$PWD"'
 alias cfish='chezmoi edit ~/.config/fish/config.fish; chezmoi apply'
 #alias ytdl="yt-dlp --remote-components ejs:github"
 alias go2bios="sudo systemctl reboot --firmware-setup"
+alias zz='glow (fd -e md -e markdown . | fzf)'
 
 # pyenv (safe for fish)
 set -Ux PYENV_ROOT $HOME/.pyenv
